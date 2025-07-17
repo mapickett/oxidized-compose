@@ -1,0 +1,25 @@
+---
+volumes:
+  data:
+services:
+  oxidized:
+    restart: always
+    build: ./app
+    container_name: oxidized
+    depends_on:
+      oxidized-inv:
+        condition: service_healthy
+    ports:
+      - 8888:8888/tcp
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8888"]
+  oxidized-inv:
+    restart: always
+    build: ./inv
+    container_name: oxidized-inv
+    ports:
+      - 5000:5000/tcp
+    healthcheck:
+      test: ["CMD", "curl", "-f", "-k", "https://localhost:5000/health"]
+      start_period: 1s
+      start_interval: 1s

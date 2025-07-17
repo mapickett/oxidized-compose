@@ -1,0 +1,4 @@
+name:ip:model:group:username:password
+router1:10.0.0.1:ios:core:admin:cisco123
+switch1:10.0.0.2:procurve:edge::
+firewall1:10.0.0.3:asa:security:admin:asaSecret
